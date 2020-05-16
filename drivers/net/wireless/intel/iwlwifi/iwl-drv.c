@@ -2059,6 +2059,7 @@ struct iwl_mod_params iwlwifi_mod_params = {
 	.bt_coex_active = true,
 	.power_level = IWL_POWER_INDEX_1,
 	.uapsd_disable = IWL_DISABLE_UAPSD_BSS | IWL_DISABLE_UAPSD_P2P_CLIENT,
+	.lar_disable = true,
 	.enable_ini = true,
 	/* the rest are 0 by default */
 };
@@ -2217,6 +2218,9 @@ MODULE_PARM_DESC(antenna_coupling,
 
 module_param_named(nvm_file, iwlwifi_mod_params.nvm_file, charp, 0444);
 MODULE_PARM_DESC(nvm_file, "NVM file name");
+
+module_param_named(lar_disable, iwlwifi_mod_params.lar_disable, bool, 0444);
+MODULE_PARM_DESC(lar_disable, "disable LAR functionality (default: true)");
 
 module_param_named(uapsd_disable, iwlwifi_mod_params.uapsd_disable, uint, 0644);
 MODULE_PARM_DESC(uapsd_disable,

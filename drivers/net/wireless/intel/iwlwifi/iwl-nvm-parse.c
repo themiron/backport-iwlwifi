@@ -1221,6 +1221,7 @@ iwl_parse_nvm_data(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 	iwl_init_he_override(trans, &data->bands[NL80211_BAND_5GHZ]);
 #endif
 	if (lar_enabled &&
+	    !iwlwifi_mod_params.lar_disable &&
 	    fw_has_capa(&fw->ucode_capa, IWL_UCODE_TLV_CAPA_LAR_SUPPORT))
 		sbands_flags |= IWL_NVM_SBANDS_FLAGS_LAR;
 
@@ -1711,6 +1712,7 @@ struct iwl_nvm_data *iwl_get_nvm(struct iwl_trans *trans,
 	nvm->valid_rx_ant = (u8)le32_to_cpu(rsp->phy_sku.rx_chains);
 
 	if (le32_to_cpu(rsp->regulatory.lar_enabled) &&
+	    !iwlwifi_mod_params.lar_disable &&
 	    fw_has_capa(&fw->ucode_capa,
 			IWL_UCODE_TLV_CAPA_LAR_SUPPORT)) {
 		nvm->lar_enabled = true;
